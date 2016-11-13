@@ -1,6 +1,6 @@
 # immutable-sql
 
-
+[![Clojars Project](https://img.shields.io/clojars/v/immutable-sql.svg)](https://clojars.org/immutable-sql)
 
 ## Usage
 
