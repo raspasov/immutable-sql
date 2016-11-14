@@ -68,6 +68,8 @@ Your table should now look something like this:
 
 
 TODO
+- explanation of trade-offs
+- more examples
 
 ## License
 
