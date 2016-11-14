@@ -61,7 +61,7 @@ This prints out the SQL that creates the Postgres schema, table, table columns a
 
 Your table should now look something like this:
 ![Image of table state]
-(https://github.com/raspasov/immutable-sql/tree/master/doc/table.png)
+(https://github.com/raspasov/immutable-sql/tree/master/doc/table1.png)
 
 (screenshot from Postico - great Postgres client)
 
