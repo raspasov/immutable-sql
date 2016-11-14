@@ -63,6 +63,7 @@ Your table should now look something like this:
 
 <img src="/doc/table1.png" align="left" width="800px" hspace="5px"/>
 
+
 (screenshot from Postico - great Postgres client)
 
 
