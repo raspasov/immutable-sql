@@ -61,8 +61,7 @@ This prints out the SQL that creates the Postgres schema, table, table columns a
 
 Your table should now look something like this:
 
-<img src="/doc/table1.png" align="left" width="800px" hspace="5px"/>
-
+<img src="/doc/table1.png" width="800px" hspace="5px"/>
 
 (screenshot from Postico - great Postgres client)
 
