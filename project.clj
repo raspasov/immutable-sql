@@ -1,4 +1,4 @@
-(defproject immutable-sql "0.1.0"
+(defproject immutable-sql "0.1.1"
   :description "Immutable SQL"
   :url "https://github.com/raspasov/immutable-sql"
   :license {:name "Eclipse Public License"
