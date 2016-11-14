@@ -2,7 +2,69 @@
 
 [![Clojars Project](https://img.shields.io/clojars/v/immutable-sql.svg)](https://clojars.org/immutable-sql)
 
-## Usage
+Add to your project.clj:
+
+```clj
+;add latest version from Clojars
+[immutable-sql "x.x.x"]
+```
+
+Add to your namespace imports:
+
+```clj
+(:require [immutable-sql.core :as imm-sql]
+          [clojure.core.async :refer [<!!]])
+```
+
+##Create a table
+
+```clj
+(create-table
+      ;name of the Postgres schema and the table itself
+      "test_schema" "test_table"
+      ;map of "column_name" => postgres type
+      {"title" "TEXT NOT NULL"
+       "uuid" "TEXT NOT NULL"
+       "price" "numeric(21,6)"
+       "image" "TEXT NOT NULL"}
+      ;add index on those columns
+      ["uuid"])
+```
+This prints out the SQL that creates the Postgres schema, table, table columns and indices.
+
+##Write a row
+```clj
+(<!! (imm-sql/immutable-insert!
+       (p/get-db)
+       :test_schema.test_table
+       ;identity (aka row) lookup is determined by this
+       {:uuid "uuid-1"}
+       ;we write with a function; function takes previous row as a map
+       ;in this case m is nill - there's no row where uuid = 'uuid-1' yet 
+       (fn [m]
+         {:uuid  "uuid-1"
+          :title "Clojure stickers"
+          :price 1.00
+          :image "http://clojure.org/images/clojure-logo-120b.png"})))
+```
+
+##"Update" a row 
+```clj
+(<!! (imm-sql/immutable-insert!
+       (p/get-db)
+       :test_schema.test_table
+       {:uuid "uuid-1"}
+       (fn [m]
+         ;m here is the previous version of the row 
+         (assoc m :title "Clojure stickers are awesome"))))
+```
+
+Your table should now look something like this:
+![Image of table state]
+(https://github.com/raspasov/immutable-sql/tree/master/doc/table.png)
+
+(screenshot from Postico - great Postgres client)
+
 
 TODO
 
