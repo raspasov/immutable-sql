@@ -13,10 +13,25 @@ Add to your namespace imports:
 
 ```clj
 (:require [immutable-sql.core :as imm-sql]
-          [clojure.core.async :refer [<!!]])
+          [clojure.core.async :refer [<!!]
+          [postgres.async :as postgres-async]])
 ```
 
-##Create a table
+###Set up a connection pool
+Immutable SQL currently only supports the alaisi/postgres.async library. clojure.jdbc PR's welcome!
+```clj
+(def db (postgres-async/open-db
+          {:hostname  "db.example.com"
+           :port      5432                                  
+           :database  "exampledb"
+           :username  "user"
+           :password  "pass"
+           :pool-size 25}))
+```
+(Taken from https://github.com/alaisi/postgres.async#setting-up-a-connection-pool)
+
+
+###Create an "immutable" table
 
 ```clj
 (create-table
@@ -30,12 +45,13 @@ Add to your namespace imports:
       ;add index on those columns
       ["uuid"])
 ```
-This prints out the SQL that creates the Postgres schema, table, table columns and indices.
+This prints out the SQL that creates the Postgres schema, table, table columns and indices. Run it with your favorite Postgres client.
 
-##Write a row
+
+###Insert a new row
 ```clj
 (<!! (imm-sql/immutable-insert!
-       (p/get-db)
+       db
        :test_schema.test_table
        ;identity (aka row) lookup is determined by this
        {:uuid "uuid-1"}
@@ -48,7 +64,7 @@ This prints out the SQL that creates the Postgres schema, table, table columns a
           :image "http://clojure.org/images/clojure-logo-120b.png"})))
 ```
 
-##"Update" a row 
+###"Update" a row 
 ```clj
 (<!! (imm-sql/immutable-insert!
        (p/get-db)
@@ -75,6 +91,5 @@ TODO
 
 Copyright © 2016 Rangel Spasov
 
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Distributed under the MIT License
 # immutable-sql
