@@ -67,7 +67,7 @@ This prints out the SQL that creates the Postgres schema, table, table columns a
 ###"Update" a row 
 ```clj
 (<!! (imm-sql/immutable-insert!
-       (p/get-db)
+       db
        :test_schema.test_table
        {:uuid "uuid-1"}
        (fn [m]
