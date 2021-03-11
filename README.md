@@ -17,7 +17,7 @@ Add to your namespace imports:
           [postgres.async :as postgres-async]])
 ```
 
-###Set up a connection pool
+### Set up a connection pool
 Immutable SQL currently only supports the alaisi/postgres.async library. clojure.jdbc PR's welcome!
 ```clj
 (def db (postgres-async/open-db
@@ -31,7 +31,7 @@ Immutable SQL currently only supports the alaisi/postgres.async library. clojure
 (Taken from https://github.com/alaisi/postgres.async#setting-up-a-connection-pool)
 
 
-###Create an "immutable" table
+### Create an "immutable" table
 
 ```clj
 (create-table
@@ -48,7 +48,7 @@ Immutable SQL currently only supports the alaisi/postgres.async library. clojure
 This prints out the SQL that creates the Postgres schema, table, table columns and indices. Run it with your favorite Postgres client.
 
 
-###Insert a new row
+### Insert a new row
 ```clj
 (<!! (imm-sql/immutable-insert!
        db
@@ -64,7 +64,7 @@ This prints out the SQL that creates the Postgres schema, table, table columns a
           :image "http://clojure.org/images/clojure-logo-120b.png"})))
 ```
 
-###"Update" a row 
+### "Update" a row 
 ```clj
 (<!! (imm-sql/immutable-insert!
        db
@@ -83,13 +83,13 @@ Your table should now look something like this:
 (screenshot from Postico - great Postgres client)
 
 
-TODO
+### TODO
 - explanation of trade-offs
 - more examples
 
 ## License
 
-Copyright © 2016 Rangel Spasov
+Copyright © 2016-2021 Rangel Spasov
 
 Distributed under the MIT License
 # immutable-sql
